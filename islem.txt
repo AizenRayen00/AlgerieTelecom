@@ -1,0 +1,37 @@
+islem 
+
+bafkreigrwo2cvoijsx355clfjbcbxyhx77ix6ilfpab6tjaif6zoz43fi4
+bafkreigrwo2cvoijsx355clfjbcbxyhx77ix6ilfpab6tjaif6zoz43fi4
+
+
+
+
+const express = require("express");
+const fs = require("fs").promises;
+
+const app = express();
+
+// Replace with the actual code from your original upload function
+async function uploadFileToIPFS(file) {
+  // Implement your logic to create and provision space, upload the file, etc.
+  // This example assumes you have the `myFunction` function defined
+  const fileCid = await myFunction(file);
+  return { cid: fileCid };
+}
+
+app.post("/upload", async (req, res) => {
+  try {
+    const file = req.files.file; // Assuming the file is sent under the key "file"
+    const fileCid = await uploadFileToIPFS(file);
+    res.json(fileCid);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error uploading file");
+  }
+});
+
+const port = process.env.PORT || 3000; // Use environment variable or default to 3000
+
+app.listen(port, () => {
+  console.log(`Server listening on port ${port}`);
+});
